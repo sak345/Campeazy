@@ -6,6 +6,14 @@ module.exports.isLoggedIn = ((req, res, next) => {//checks if a user is logged i
     next();
 })
 
+module.exports.isVerified = ((req, res, next) => {
+    if (!req.user.verified) {
+        req.flash('err', 'You must verify your email first')
+        return res.redirect(`/verify/${req.user._id}`)
+    }
+    next();
+})
+
 module.exports.storeReturnTo = ((req, res, next) => {//stores the last visited URL to res.locals to return back to previous page before logging in
     if (req.session.returnTo) {
         res.locals.returnTo = req.session.returnTo
@@ -90,3 +98,5 @@ module.exports.validateUser = (req, res, next) => {
         next();
     }
 }
+
+

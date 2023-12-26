@@ -1,0 +1,43 @@
+<%- layout('layouts/boilerplate')%>
+<link rel="stylesheet" href="/stylesheets/verificationForm.css" />
+<div class="" hidden id="otpCreatedAt"><%= otp.createdAt %></div>
+<div class="row text-white m-auto">
+    <div class="col-md-6 offset-md-3 px-5 mt-2 container flex-column align-items-center justify-content-center mb-3">
+        <div class="card text-bg-light shadow p-3">
+            <div class="bg-dark rounded pt-2" style="height: 65px;">
+                <img class=" ms-2" style="width: 50px; height: 50px;" src="/icons/favicon.ico" alt=""><span class="h2 ms-4" style="color: #fff;">Camp<span style="color: #FF8C00;">eazy</span>
+            </div>
+            <div class="card-body text-center">
+                <h4>Welcome to Campeazy <%= user.username %>! </h4>
+                <p>We've sent a verification code to <%= user.email %>, please verify your email by entering the code below to proceed further.</p>
+                <p>(Note: The code will expire in 2 minutes)</p>
+                <div class="prompt">
+                    Enter the code below: 
+                </div>
+                
+                <form method="post" action='/verify/<%= user._id %>' class="digit-group d-block" data-group-name="digits" data-autosubmit="false" autocomplete="off">
+                    <input type="text" maxlength="1" id="digit-1" name="digit1" data-next="digit-2" />
+                    <input type="text" maxlength="1" id="digit-2" name="digit2" data-next="digit-3" data-previous="digit-1" />
+                    <input type="text" maxlength="1" id="digit-3" name="digit3" data-next="digit-4" data-previous="digit-2" />
+                    <input type="text" maxlength="1" id="digit-4" name="digit4" data-next="digit-5" data-previous="digit-3" />
+                    <input type="text" maxlength="1" id="digit-5" name="digit5" data-next="digit-6" data-previous="digit-4" />
+                    <input type="text" maxlength="1" id="digit-6" name="digit6" data-previous="digit-5" />
+                    <br>
+                    <button type="submit" class="btn btn-primary m-auto me-2 mt-3 d-inline">Verify</button>
+                </form>
+                <form action="/verify/<%= user._id %>" id="resendForm" method="GET">
+                    <button type="submit" id="resend-btn" onclick="onclick()" class="btn mt-3 btn-warning m-auto disabled d-inline pb-2" >Resend Code <span id="time"></span> </button>
+                </form>
+                       
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/javascripts/verificationForm.js"></script>
+<script src="/javascripts/timer.js"></script>
+  
+  
+  
+  
+  
+  

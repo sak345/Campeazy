@@ -7,13 +7,14 @@ module.exports.renderSignupForm = (req, res) => {
 module.exports.createNewUser = async (req, res, next) => {
     const { username, email, password } = req.body
     const user = new User({ username, email })
+
     const registeredUser = await User.register(user, password);
     req.login(registeredUser, (err) => {
         if (err) {
             return next(err);
         }
-        req.flash('success', "You've been successfully registered to YelpCamp community!")
-        res.redirect('/campgrounds')
+        req.flash('success', "You've been successfully registered to Campeazy community!")
+        res.redirect(`/verify/${user._id}`)
     })
 
 }
